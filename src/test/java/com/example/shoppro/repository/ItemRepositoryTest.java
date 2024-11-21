@@ -8,6 +8,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,26 +38,23 @@ class ItemRepositoryTest {
     @DisplayName("상품 저장 테스트")
     public void createItemTest(){
 
-        for (int i = 0; i<200; i++){
+
+        for(int i =0; i< 200; i++){
             Item item =
                     Item.builder()
-                            .itemNm("테스트 상품")
+                            .itemNm("테스트상품")
                             .price(10000)
                             .itemDetail("테스트상품 상세설명")
                             .itemSellStatus(ItemSellStatus.SELL)
                             .stockNumber(100)
-                            .regTime(LocalDateTime.now())
-                            .updateTime(LocalDateTime.now())
                             .build();
-
             item.setItemNm(item.getItemNm() + i);
-            item.setItemDetail(item.getItemDetail() + i);
-            item.setPrice(item.getPrice() + i);
+            item.setItemDetail( item.getItemDetail() + i  );
+            item.setPrice( item.getPrice() + i  );
 
             Item item1 =
                     itemRepository.save(item);
             log.info(item1);
-
         }
 
     }
@@ -64,6 +62,7 @@ class ItemRepositoryTest {
 
     @Test
     @DisplayName("제품명으로 검색. 2가지에서 다시 2가지 검색")
+    @Transactional
     public void findByItemNmTest(){
 
         List<Item> itemListA =
@@ -90,6 +89,7 @@ class ItemRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void priceSearchtest(){
         // 가격 검색 테스트
         // 사용자가 검색창에 혹은 검색이 가능하도록 만들어놓은 곳에 값을 입력한다.
@@ -103,6 +103,7 @@ class ItemRepositoryTest {
             log.info("상 품 명 : "+item.getItemNm());
             log.info("상 품 가 격 : "+item.getPrice());
             log.info("상 품 상 세 설 명 : "+item.getItemDetail());
+            log.info("상 품 이미지들 : "+item.getItemImgList());
         }
 
         List<Item> itemListA =
@@ -112,6 +113,7 @@ class ItemRepositoryTest {
             log.info("상 품 명 : "+item.getItemNm());
             log.info("상 품 가 격 : "+item.getPrice());
             log.info("상 품 상 세 설 명 : "+item.getItemDetail());
+            log.info("상 품 이미지들 : "+item.getItemImgList());
         }
 
         List<Item> itemListB =
@@ -126,6 +128,7 @@ class ItemRepositoryTest {
 
     @Test
     @DisplayName("페이징 추가까지")
+    @Transactional
     public void findbypricegreaterThanEqualTest(){
         Pageable pageable = PageRequest
                 .of(0,5, Sort.by("id").ascending());
@@ -143,6 +146,7 @@ class ItemRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void nativeQueryTest(){
         Pageable pageable
                 = PageRequest.of(0,5,Sort.by("price").descending());
