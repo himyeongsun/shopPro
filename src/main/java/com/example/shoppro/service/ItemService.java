@@ -1,6 +1,5 @@
 package com.example.shoppro.service;
 
-import com.example.shoppro.constant.ItemSellStatus;
 import com.example.shoppro.dto.ItemDTO;
 import com.example.shoppro.dto.PageRequestDTO;
 import com.example.shoppro.dto.PageResponseDTO;
@@ -119,18 +118,17 @@ public class ItemService {
 
     public ItemDTO update(ItemDTO itemDTO, Long id, List<MultipartFile> multipartFiles, Integer[] delino, Long mainino) {
         // 아이템 수정
+
         Item item =
-                itemRepository.findById(itemDTO.getId()).orElseThrow(EntityNotFoundException::new);
+                itemRepository.findById(    itemDTO.getId()   )
+                        .orElseThrow(EntityNotFoundException::new);
 
-        // set
-        item.setItemNm(itemDTO.getItemNm());
-        item.setPrice(itemDTO.getPrice());
-        item.setItemDetail(item.getItemDetail());
-        item.setItemSellStatus(itemDTO.getItemSellStatus());
-        item.setStockNumber(itemDTO.getStockNumber());
-
-
-
+        //set
+        item.setItemNm(itemDTO.getItemNm()  );
+        item.setPrice(  itemDTO.getPrice());
+        item.setItemDetail(itemDTO.getItemDetail()  );
+        item.setItemSellStatus( itemDTO.getItemSellStatus() );
+        item.setStockNumber(itemDTO.getStockNumber()  );
 
 
 
@@ -147,6 +145,7 @@ public class ItemService {
             }
         }
 
+
         try {
             itemImgService.update(id, multipartFiles, mainino);
 
@@ -156,19 +155,39 @@ public class ItemService {
         }
 
 
+
         return  null;
     }
 
-    public void remove(Long id){
 
-        log.info("서비스로 들어온 삭제할 아이템 번호 : "+id);
+    public void remove(Long id){
+        log.info("서비스로 들어온 삭제할 아이템번호 : " + id);
+
 
         itemRepository.deleteById(id);
 
-        
 
     }
 
+
+
+    public PageResponseDTO<ItemDTO> mainlist(PageRequestDTO pageRequestDTO) {
+
+        Pageable pageable = pageRequestDTO.getPageable("id");
+        Page<Item> items =
+                itemRepository.getAdminItemPage(pageRequestDTO, pageable);
+        List<ItemDTO> itemDTOPage =
+                items.getContent().stream().map(item -> modelMapper.map(item, ItemDTO.class))
+                        .collect(Collectors.toList());
+
+        PageResponseDTO<ItemDTO> itemDTOPageResponseDTO
+                = PageResponseDTO.<ItemDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(itemDTOPage)
+                .total((int) items.getTotalElements())
+                .build();
+        return itemDTOPageResponseDTO;
+    }
 
 
 

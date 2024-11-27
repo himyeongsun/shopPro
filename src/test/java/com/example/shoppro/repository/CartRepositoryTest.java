@@ -1,5 +1,6 @@
 package com.example.shoppro.repository;
 
+import com.example.shoppro.entity.Cart;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +12,26 @@ import static org.junit.jupiter.api.Assertions.*;
 @Log4j2
 class CartRepositoryTest {
 
+
     @Autowired
     CartRepository cartRepository;
 
     @Autowired
     MemberRepository memberRepository;
 
+
     @Test
-    public void a(){
+    public  void a(){
+
+        //  카트만들기
+
+        //회원필요
+        Cart cart = new Cart();
+        cart.setMember(memberRepository.findByEmail("test@a.a"));
+
+        cartRepository.save(cart);
+
+
 
     }
-
 }
