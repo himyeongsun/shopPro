@@ -171,5 +171,15 @@ public class ItemController {
         return null;
     }
 
+    @PostMapping("admin/item/del")
+    public String delitem(Long id){
+
+        log.info("삭제할 아이템 번호 : "+id);
+
+        itemService.remove(id);
+
+        return "redirect:/admin/item/list";
+    }
+
 
 }

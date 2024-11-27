@@ -95,6 +95,10 @@
                 </nav>
             </div>
         </div>
+
+        <form class="delform">
+
+        </form>
     </th:block>
 
     <script th:inline="javascript">
@@ -105,7 +109,14 @@
                 location.href = "/admin/item/update?id=" + $(this).val();
             })
             $(".delMoveBtn").on("click", function () {
-                location.href = "/admin/item/update?id=" + $(this).val();
+                let formtag = document.createElement("form")
+                formtag.action = "/admin/item/del";
+                formtag.method = "post";
+                formtag.innerHTML = "<input name='id' value='"+this.value+"'>"
+                $(".delform").append(formtag)
+
+                formtag.submit();
+
             })
 
 

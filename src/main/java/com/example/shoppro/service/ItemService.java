@@ -159,6 +159,16 @@ public class ItemService {
         return  null;
     }
 
+    public void remove(Long id){
+
+        log.info("서비스로 들어온 삭제할 아이템 번호 : "+id);
+
+        itemRepository.deleteById(id);
+
+        
+
+    }
+
 
 
 

@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString// (exclude = "itemImgList")  //toString 변수 제외할 변수명
+@ToString //(exclude = "itemImgList")  //toString 변수 제외할 변수명
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -42,11 +42,8 @@ public class Item extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;*/
 
-    @OneToMany
-    @JoinColumn(name = "item_id")
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private List<ItemImg> itemImgList;
-
-
 
 
 }
