@@ -30,6 +30,7 @@ public class SecurityConfig {
                                 .requestMatchers("/board/register").authenticated() // 로그인 한 사람만 접속 가능
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/user/list").hasRole("ADMIN")
+                                .requestMatchers("/order/**").authenticated()
                                 .anyRequest().permitAll()       // 그외 다 열어
 //                            .anyRequest().authenticated()   //그 이외에는 다 로그인해서 접속해
 
@@ -54,7 +55,7 @@ public class SecurityConfig {
                         //컨트롤러에서 만들어줄껄?
 
                 )
-        // 예외처리 // 로그인이 되지 않은 사용자 , 권한이 없는 사용자 접속시 취할 행동들
+                // 예외처리 // 로그인이 되지 않은 사용자 , 권한이 없는 사용자 접속시 취할 행동들
                 .exceptionHandling(
                         a -> a.authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                                 .accessDeniedHandler(new CustomAccessDeniedHandler())
