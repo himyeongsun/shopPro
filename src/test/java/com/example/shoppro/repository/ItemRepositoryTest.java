@@ -54,7 +54,7 @@ class ItemRepositoryTest {
         //필요한값 부모id 411L
         //실행내용 부모를 item을 검색한다. 특정 pk값을 가지고
         Item item =
-                itemRepository.findById(411L).get();
+                itemRepository.findById(41L).get();
 
         //결과 예상 부모를 검색하면 부모와 + 자식의 모든데이터를 받는다.
 

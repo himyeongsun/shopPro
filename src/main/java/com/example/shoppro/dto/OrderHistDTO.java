@@ -34,6 +34,12 @@ public class OrderHistDTO {
 
     }
 
+    public OrderHistDTO setOrderItemDTOList(List<OrderItemDTO> orderItemDTOList){
+        this.orderItemDTOList = orderItemDTOList;
+
+        return this;
+    }
+
 
 
 
