@@ -36,7 +36,7 @@ class CartItemRepositoryTest {
 
         for(CartItem cartItem  : cartItemList ) {
             CartDetailDTO detailDTO = new CartDetailDTO();
-            detailDTO.setCartItemId(cartItem.getId());
+            detailDTO.setCartItemid(cartItem.getId());
             detailDTO.setItemNm(cartItem.getItem().getItemNm());
             detailDTO.setCount(cartItem.getCount());
             detailDTO.setPrice(cartItem.getItem().getPrice());

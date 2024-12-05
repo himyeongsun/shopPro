@@ -74,7 +74,7 @@ public class ItemController {
                     itemService.saveItem(itemDTO, multipartFile);
 
             log.info("상품등록됨!!!!");
-            log.info("상품등록됨!!!!" );
+            log.info("상품등록됨!!!!");
             log.info("상품등록됨!!!!");
             log.info("상품등록됨!!!!");
 
