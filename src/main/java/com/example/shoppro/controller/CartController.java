@@ -154,6 +154,7 @@ public class CartController {
         }
 
 //        Long orderId = cartService.
+        Long orderId = cartService.orderCartItem(cartOrderDTOList, principal.getName());
 
         return new ResponseEntity<Long>(1L, HttpStatus.OK);
 
