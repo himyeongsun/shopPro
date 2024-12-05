@@ -48,9 +48,6 @@ public class OrderController {
         // 만약 아이템id가 없다면
         // 만약 수량이 없다면
 
-
-
-
         // 유효성검사
         if(bindingResult.hasErrors()){
             StringBuffer sb = new StringBuffer();       //String
@@ -135,7 +132,7 @@ public class OrderController {
         log.info("취소할 주문번호" + orderId);
         log.info("취소할 주문번호로 달린 아이템들");
 
-        if (orderService.validateOrder(orderId, principal.getName())){
+        if (orderService.validateorder(orderId, principal.getName())){
             // 내 제품이 아니다.
             return new ResponseEntity<String>("주문 취소 권한이 없습니다.", HttpStatus.FORBIDDEN);
         }

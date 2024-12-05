@@ -23,6 +23,7 @@ public class BaseEntity extends BaseTimeEntity{
     @Column(updatable = false)
     @CreatedBy
     private String createBy;
+
     //수정한이
     @LastModifiedBy
     private String modifiedBy;

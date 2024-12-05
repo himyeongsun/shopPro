@@ -56,12 +56,13 @@
                             </select>
                         </div>
                     </div>
-                    <!--이미지 미리 보기-->
+                    <!--이미지 미리보기-->
                     <div class="col-12">
                         <div class="row  main imgpreview">
 
                         </div>
                         <div class="row row-cols-md-3 imgpreviewinput imgpreview">
+
 
                         </div>
 
@@ -80,9 +81,9 @@
 
                     <div class="col-12">
                         <button class="btn btn-dark">저장</button>
-                        <button type="button" class="btn btn-dark listbtn">목록</button>
+                        <button type="button"  class="btn btn-dark listbtn">목록</button>
                         <script>
-                            $(".listbtn").on("click",function (){
+                            $(".listbtn").on("click", function () {
                                 location.href = "/admin/item/list";
                             })
                         </script>
@@ -189,9 +190,10 @@
                     reader.onload = function(e) {
                         let inputtag = document.createElement("input")
 
+
                         inputtag.type = "file"
                         inputtag.name = "multipartFile"
-                        // inputtag.files = input.files
+                        //inputtag.files = input.files //참조값 주소
 
                         const dataTranster = new DataTransfer();
                         const fileDatas = Array.from(input.files);
@@ -202,14 +204,17 @@
                         fileDatas.forEach(file =>  dataTranster.items.add(file) );
                         inputtag.files = dataTranster.files;
 
-                        let str1 = `<div class="preview col">
-                                  <img width="100%" src="${e.target.result}">
-                                  <button type='button' class='bb'>올리지 않기</button>
-                                  </div>`
+
+                        let str1 = ` <div class="preview col">
+                                        <img width="100%" src="${e.target.result}">
+                                        <button type='button' class='bb'>올리지 않기</button>
+                                    </div>`
                         $(".main").html(str1)
                         $(".main").find('div:eq(0)').append(inputtag)
                         $(".main").find('input').hide()
                         $(".imgInput").val("")
+
+
 
                     };
                     reader.readAsDataURL(input.files[0]);
@@ -226,16 +231,15 @@
                         inputtag.type = "file"
                         inputtag.name = "multipartFile"
                         /*inputtag.files = input.files*/
-
                         const dataTranster = new DataTransfer();
                         const $fileDatas = Array.from(input.files);
                         $fileDatas.forEach(file =>  dataTranster.items.add(file) );
                         inputtag.files = dataTranster.files;
 
-                        let str1 = `<div class="preview col">
+                        let str1 = ` <div class="preview col">
                                   <img width="100%" src="${e.target.result}">
                                   <button type='button' class='bb'>올리지 않기</button>
-                                  </div>`
+                                </div>`
                         $(".imgpreviewinput").prepend(str1)
                         // $(".imgpreviewinput").append(str)
                         $(".imgpreviewinput").find('div:eq(0)').prepend(inputtag)

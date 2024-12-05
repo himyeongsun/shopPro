@@ -24,6 +24,7 @@ public class BaseTimeEntity {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime regTime;
+
     //수정날짜
     @LastModifiedDate
     private LocalDateTime updateTime;

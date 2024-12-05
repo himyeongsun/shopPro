@@ -103,7 +103,10 @@ public class ItemImgService {
 
                             itemImg =
                                     itemImgRepository.findByItemIdAndRepimgYn(id, "Y");
-
+                            itemImg.setItem(item);      //본문 // 이미지가 달릴 아이템
+                            itemImg.setImgName(savedFileName);       //uuid포함 저장될 이름
+                            itemImg.setImgUrl(imgUrl);        //경로
+                            itemImg.setOriImgName(img.getOriginalFilename());    // 원래이름
 
 //                            itemImg.setRepimgYn("Y");      //대표이미지
                         }else {

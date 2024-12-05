@@ -76,7 +76,7 @@
                     <ul class="pagination">
                         <!--이전으로-->
                         <th:block th:if="${pageResponseDTO.prev}">
-                            <li class="page-item"><a class="page-link" th:href="|@{'/admin/item/list?page=' + ${pageResponseDTO.start-1}}|">Previous</a></li>
+                            <li class="page-item"><a class="page-link" th:href="|@{'/admin/item/list?page=' +${pageResponseDTO.start-1}}|">Previous</a></li>
 
                         </th:block>
 
@@ -96,9 +96,10 @@
             </div>
         </div>
 
-        <form class="delform">
+        <div class="delform">
 
-        </form>
+        </div>
+
     </th:block>
 
     <script th:inline="javascript">
@@ -109,13 +110,14 @@
                 location.href = "/admin/item/update?id=" + $(this).val();
             })
             $(".delMoveBtn").on("click", function () {
-                let formtag = document.createElement("form")
+                let  formtag =  document.createElement("form")
                 formtag.action = "/admin/item/del";
                 formtag.method = "post";
-                formtag.innerHTML = "<input name='id' value='"+this.value+"'>"
-                $(".delform").append(formtag)
+                formtag.innerHTML = "<input name='id' value='"  +this.value+  "'>";
+                $(".delform").append(formtag);
 
                 formtag.submit();
+
 
             })
 
